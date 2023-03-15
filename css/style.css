@@ -2,6 +2,7 @@
   background-color: #f8f8f8;
   font-family: 'Roboto', sans-serif;
   margin: 0;
+  color: #222;
 }
 
 .body__wrapper {
@@ -52,6 +53,13 @@
 
 .search__input_invalid {
   border-color: #fa5d29;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
 }
 
 .search-field__message {

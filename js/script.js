@@ -13,28 +13,37 @@ form.onsubmit = async (event) => {
   if (isSearchQueryValid) {
     loader.hidden = false;
     repositoriesElement.innerHTML = '';
-    
-    try {
-      const result = await octokit.request("GET /search/repositories", {
-        q: queryString,
-      });
-      loader.hidden = true;
-      const repositories = result.data.items.slice(0, 10);
-      showRepositories(repositories);
-    } catch (error) {
-      loader.hidden = true;
-      handleError(error.status);
-    }
+    await sendRequest(queryString);
+  }
+}
+
+async function sendRequest(queryString) {
+  try {
+    const result = await octokit.request("GET /search/repositories", {
+      q: queryString,
+    });
+    loader.hidden = true;
+    const repositories = result.data.items.slice(0, 10);
+    showRepositories(repositories);
+  } catch (error) {
+    loader.hidden = true;
+    handleError(error.status);
   }
 }
 
 function showRepositories(repositories) {
-  for (const repository of repositories) {
+  if (repositories.length === 0) {
     repositoriesElement.insertAdjacentHTML('beforeend', `
-      <div class="repository">
-        <a class="repository__link" href="${repository.html_url}" target="_blank">${repository.owner.login}/<em class="repository__name">${repository.name}</em></a>
-      </div>
-    `)
+        <p>Ничего не найдено</p>
+      `)
+  } else {
+    for (const repository of repositories) {
+      repositoriesElement.insertAdjacentHTML('beforeend', `
+        <div class="repository">
+          <a class="repository__link" href="${repository.html_url}" target="_blank">${repository.owner.login}/<em class="repository__name">${repository.name}</em></a>
+        </div>
+      `)
+    }
   }
 }
 
