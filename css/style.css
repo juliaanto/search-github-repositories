@@ -16,7 +16,6 @@
 
 .search__field {
   position: relative;
-  border-bottom: 1px solid #e9e9e9;
   height: 47px;
   flex-grow: 1;
 }
@@ -32,7 +31,8 @@
   width: 100%;
   height: 100%;
   border: none;
-  padding: 0 16px 0 50px;
+  padding: 1px 16px 0 50px;
+  border-bottom: 1px solid #e9e9e9;
   color: #222;
   font-size: 16px;
   font-family: 'Roboto', sans-serif;
@@ -42,12 +42,23 @@
   outline: none;
   border: 1px solid #a7a7a7;
   border-right: none;
-  padding-left: 49px;
+  padding: 0 16px 0 49px;
 }
 
 .search__input::placeholder {
   font-weight: 300;
   color: #777777;
+}
+
+.search__input_invalid {
+  border-color: #fa5d29;
+}
+
+.search-field__message {
+  color: #fa5d29;
+  font-size: 12px;
+  font-weight: 300;
+  margin: 8px 0;
 }
 
 .search__button {
