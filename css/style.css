@@ -6,6 +6,7 @@
 }
 
 .body__wrapper {
+  min-width: 220px;
   max-width: 720px;
   margin: 0 auto;
   padding: 50px;
