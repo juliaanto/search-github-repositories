@@ -2,11 +2,11 @@
   background-color: #f8f8f8;
   font-family: 'Roboto', sans-serif;
   margin: 0;
-  color: #222;
+  color: #24292f;
 }
 
 .body__wrapper {
-  max-width: 800px;
+  max-width: 720px;
   margin: 0 auto;
   padding: 50px;
 }
@@ -86,6 +86,25 @@ input:-webkit-autofill:active{
   padding-top: 40px;
 }
 
+.repository {
+  padding: 25px 0;
+  border-bottom: 1px solid #d6d6d6;
+}
+
+.repository:last-child {
+  border-bottom: none;
+}
+
+.repository__full-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.repository__full-name svg {
+  fill: #6a737d;
+}
+
 .repository__link {
   text-decoration: none;
   color: #0969da;
@@ -98,6 +117,57 @@ input:-webkit-autofill:active{
 .repository__name {
   font-style: normal;
   font-weight: 500;
+}
+
+.repository__wrapper {
+  margin-left: 24px;
+}
+
+.repository__description {
+  font-size: 14px;
+  margin: 4px 0;
+}
+
+.repository__topics {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 0;
+  margin: 8px 0 5px;
+}
+
+.repository__topic {
+  background-color: #ddf4ff;
+  color: #0969da;
+  border-radius: 24px;
+  font-size: 12px;
+  line-height: 2;
+  font-weight: 500;
+  padding: 0 8px;
+}
+
+.repository__extra {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #57606a;
+}
+
+.repository__stargazers {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.repository__stargazers svg {
+  fill: #57606a;
+}
+
+.repository__extra-text {
+  margin: 0;
 }
 
 .loader {
