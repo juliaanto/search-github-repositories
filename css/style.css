@@ -82,6 +82,11 @@ input:-webkit-autofill:active{
   width: max-content;
 }
 
+.search__button:disabled {
+  opacity: 60%;
+  cursor: inherit;
+}
+
 .search-results {
   padding-top: 40px;
 }

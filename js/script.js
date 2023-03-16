@@ -2,6 +2,7 @@ import { Octokit } from "https://cdn.skypack.dev/octokit";
 
 const octokit = new Octokit({});
 const form = document.forms["search"];
+const submitButton = form.querySelector('.search__button');
 const repositoriesElement = document.querySelector('.repositories');
 const loader = document.querySelector('.loader');
 
@@ -12,6 +13,7 @@ form.onsubmit = async (event) => {
 
   if (isSearchQueryValid) {
     loader.hidden = false;
+    submitButton.disabled = true;
     repositoriesElement.innerHTML = '';
     await sendRequest(queryString);
   }
@@ -23,10 +25,12 @@ async function sendRequest(queryString) {
       q: queryString,
     });
     loader.hidden = true;
+    submitButton.disabled = false;
     const repositories = result.data.items.slice(0, 10);
     showRepositories(repositories);
   } catch (error) {
     loader.hidden = true;
+    submitButton.disabled = false;
     handleError(error.status);
   }
 }
