@@ -51,7 +51,9 @@ function showRepositories(repositories) {
             <a class="repository__link" href="${repository.html_url}" target="_blank">${repository.owner.login}/<em class="repository__name">${repository.name}</em></a>
           </div>
           <div class="repository__wrapper">
-            <p class="repository__description">${repository.description.length < 117 ? repository.description : repository.description.substr(0, 117) + '...'}</p>
+            ${repository.description ? `
+              <p class="repository__description">${repository.description?.length < 117 ? repository.description : repository.description.substr(0, 117) + '...'}</p>
+            ` : ''}
             ${repository.topics.length > 0 ? showTopics(repository.topics) : ''}
             <div class="repository__extra">
               ${repository.stargazers_count > 0 ? `
@@ -84,10 +86,45 @@ function showTopics(topics) {
 }
 
 function getDate(currentDate) {
+  let result;
+  
   const date = new Date(currentDate);
+  const now = new Date();
   const MONTH_NAMES = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-  return `Updated on ${MONTH_NAMES[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
+  const intervalInMinutes = (now - date) / (1000 * 60);
+  const intervalInHours = intervalInMinutes / 60;
+  const intervalInDays = intervalInHours / 24;
+  const intervalInWeeks = intervalInDays / 7;
+  const intervalInMonths = intervalInDays / 30;
+
+  if (intervalInMinutes < 1) {
+    result = 'Updated now';
+  } else if (intervalInMinutes < 2) {
+    result = 'Updated 1 minute ago';
+  } else if (intervalInMinutes < 60) {
+    result = `Updated ${Math.floor(intervalInMinutes)} minutes ago`;
+  } else if (intervalInHours < 2) {
+    result = 'Updated 1 hour ago';
+  } else if (intervalInHours < 24) {
+    result = `Updated ${Math.floor(intervalInHours)} hours ago`;
+  } else if (intervalInDays < 2) {
+    result = 'Updated yesterday';
+  } else if (intervalInDays < 6) {
+    result = `Updated ${Math.ceil(intervalInDays)} days ago`;
+  } else if (intervalInWeeks < 2) {
+    result = 'Updated last week';
+  } else if (intervalInWeeks < 3) {
+    result = `Updated ${Math.ceil(intervalInWeeks)} weeks ago`;
+  } else if (intervalInMonths < 1) {
+    result = 'Updated last month';
+  } else if (date.getFullYear() === now.getFullYear()) {
+    result = `Updated on ${MONTH_NAMES[date.getMonth()]} ${date.getDate()}`;
+  } else {
+    result = `Updated on ${MONTH_NAMES[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
+  }
+
+  return result;
 }
 
 function handleError(statusCode) {
