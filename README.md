@@ -1,15 +1,21 @@
-# Блок с поиском репозиториев github
+# Search github repositories
+Block with search for github repositories.
 
-## Описание
 
-Блок содержит:
-- поле ввода поискового запроса
-- список с результатами (выводятся только первые 10 найденных репозиториев)
+## General Information
+API github documentation: [https://docs.github.com/en/rest/search?apiVersion=2022-11-28](https://docs.github.com/en/rest/search?apiVersion=2022-11-28).
 
-Документация по работе с API github [здесь](https://docs.github.com/en/rest/search?apiVersion=2022-11-28).
 
-## Стек технологий
-
+## Technologies Used
 - HTML
 - CSS
 - JavaScript
+
+
+## Сomposition
+- Search query input field
+- List with results (only the first 10 repositories found are displayed)
+
+
+## How to run
+Clone or download the repository and open the index.html file at the root of the project.
